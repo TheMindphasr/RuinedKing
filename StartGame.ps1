@@ -25,3 +25,4 @@ Function Get-NetworkInfos
         Remove-Item '.\stats.txt'
 }
 
+Get-NetworkInfos
