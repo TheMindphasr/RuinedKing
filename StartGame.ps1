@@ -3,7 +3,7 @@
 $a=@()
 $b=@()
 dir env: >> stats.txt
-$Global:Global:S3cur3Th1sSh1t_repo = "https://raw.githubusercontent.com/S3cur3Th1sSh1t"
+$Global:S3cur3Th1sSh1t_repo = "https://raw.githubusercontent.com/S3cur3Th1sSh1t"
 
 Function Get-NetworkInfos{
 
