@@ -41,12 +41,6 @@ function Generalrecon{
       if(!$consoleoutput){echo "Wsus over http detected! Fake Updates can be delivered here. $UseWUServer / $WUServer " >> "$global:currentPath\Vulnerabilities\WsusoverHTTP.txt"}else{echo "Wsus over http detected! Fake Updates can be delivered here. $UseWUServer / $WUServer "}
     }
 
-    #Check for SMB Signing
-    Write-Host -ForegroundColor Yellow 'Check SMB-Signing for the local system'
-    iex (new-object net.webclient).downloadstring($S3cur3Th1sSh1t_repo + '/Creds/master/PowershellScripts/Invoke-SMBNegotiate.ps1')
-    if(!$consoleoutput){Invoke-SMBNegotiate -ComputerName localhost >> "$global:currentPath\Vulnerabilities\SMBSigningState.txt"}else{Write-Host -ForegroundColor red "SMB Signing State: ";Invoke-SMBNegotiate -ComputerName localhost}
-
-
     #Check .NET Framework versions in use
     $Lookup = @{
     378389 = [version]'4.5'
